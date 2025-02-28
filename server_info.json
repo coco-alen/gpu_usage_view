@@ -1,0 +1,7 @@
+[
+    {
+        "name": "<server name you want to show>",
+        "ip": "<ip or domain name>",
+        "username": "<ssh username>"
+    }
+]
