@@ -3,7 +3,7 @@ import io
 import time
 import csv
 import subprocess
-import multiprocessing
+import threading
 
 import pandas as pd
 
@@ -43,8 +43,8 @@ class SingleGPUServerWatcher:
             "all_from_busy_to_free": False,
         }
 
-        self.running = multiprocessing.Event()
-        self.process = None
+        self.running = threading.Event()
+        self.thread = None
 
     def is_valid_csv(self, data):
         try:
@@ -150,35 +150,45 @@ class SingleGPUServerWatcher:
         self.summerized_state = new_summerized_state
 
     def set_update_step(self, update_step):
+        logger.info(f"Set update step for {self.name} to {update_step}")
         self.update_step = update_step
         self.restart_run()
 
     def update_loop(self): # 循环更新所有蓝图中的计算结果
         while self.running.is_set():
             self.get_gpu_info()
+            logger.info(f"Updated GPU info for {self.name}")
             time.sleep(self.update_step)
 
     def start_run(self):
-        if self.process is None:
+        if self.thread is None:
             self.running.set()
-            self.process = multiprocessing.Process(target=self.update_loop)
-            self.process.daemon = True
-            self.process.start()
+            self.thread = threading.Thread(target=self.update_loop)
+            self.thread.daemon = True  # 设置为守护线程
+            self.thread.start()
+            logger.info(f"Started watching {self.name}")
+        else:
+            logger.info(f"{self.name} is already running")
     
     def stop_run(self):
-        if self.process is not None:
+        if self.thread is not None:
             self.running.clear()
-            self.process.join()
-            self.process = None
+            self.thread.join()
+            self.thread = None
+            logger.info(f"Stopped watching {self.name}")
+        else:
+            logger.info(f"{self.name} is not running")
     
     def restart_run(self):
         self.stop_run()
         self.start_run()
 
     def send_all_empty_remind(self):
+        logger.info(f"Send all free remind for {self.name}")
         ding_print_txt(text.all_free_remind.format(self.name))
 
     def send_have_empty_remind(self):
+        logger.info(f"Send have free remind for {self.name}")
         ding_print_txt(text.have_free_remind.format(self.name))
 
 

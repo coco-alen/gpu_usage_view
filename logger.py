@@ -16,5 +16,5 @@ console_handler.setLevel(log_level)
 
 logger = logging.getLogger()
 logger.setLevel(log_level)
-# logger.addHandler(file_handler)
+logger.addHandler(file_handler)
 logger.addHandler(console_handler)
