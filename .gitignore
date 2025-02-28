@@ -39,3 +39,7 @@ idea/
 vscode/
 
 # etc
+
+server_info.json
+dingtalk_token.txt
+

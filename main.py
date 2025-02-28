@@ -1,7 +1,14 @@
 import os
 import json
 import streamlit as st
+import config
 
+if config.language == 'cn':
+    import text.cn as text
+elif config.language == 'en':
+    import text.en as text
+else:
+    raise ValueError('Language setting in config.py not supported')
 
 
 def get_server_info(info_file = "server_info.json"):
@@ -21,7 +28,7 @@ def main():
 if __name__ == '__main__':
     print(" ======  main  =======")
     st.set_page_config(
-        page_title="GPU使用情况监视平台",
+        page_title=text.page_title,
         layout="centered",
         initial_sidebar_state="auto",
     )
