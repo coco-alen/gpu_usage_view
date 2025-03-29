@@ -33,6 +33,8 @@ class SingleGPUServerWatcher:
         self.state = None
         self.summerized_state = None
 
+        self.is_looping = False
+
         self.remind_config = {
             "remind_if_all_free": False,
             "remind_if_have_free": False,
@@ -60,6 +62,8 @@ class SingleGPUServerWatcher:
         state[' memory.total [MiB]'] = state[' memory.total [MiB]'].str.rstrip(' MiB').astype(int)
         state[' memory.used [MiB]'] = state[' memory.used [MiB]'].str.rstrip(' MiB').astype(int)
         state[' memory'] = state.apply(lambda row: f"{row[' memory.used [MiB]']} MiB / {row[' memory.total [MiB]']} MiB", axis=1)
+
+        state[' utilization.memory [%]'] = state.apply(lambda row: "{} %".format(row[' memory.used [MiB]'] / row[' memory.total [MiB]'] * 100), axis=1)
 
         # 删除原始的内存列
         state.drop(columns=[' memory.total [MiB]', ' memory.free [MiB]', ' memory.used [MiB]'], inplace=True)
@@ -152,23 +156,39 @@ class SingleGPUServerWatcher:
     def set_update_step(self, update_step):
         logger.info(f"Set update step for {self.name} to {update_step}")
         self.update_step = update_step
-        self.restart_run()
+        if self.thread is not None:
+            self.restart_run(loop=True)
+        else:
+            self.start_run(loop=True)
 
     def update_loop(self): # 循环更新所有蓝图中的计算结果
         while self.running.is_set():
             self.get_gpu_info()
             logger.info(f"Updated GPU info for {self.name}")
             time.sleep(self.update_step)
+    def update_once(self):
+        if self.running.is_set():
+            self.get_gpu_info()
+            logger.info(f"Updated GPU info for {self.name}")
+            self.running.clear()
+            self.thread = None
 
-    def start_run(self):
-        if self.thread is None:
-            self.running.set()
-            self.thread = threading.Thread(target=self.update_loop)
-            self.thread.daemon = True  # 设置为守护线程
-            self.thread.start()
-            logger.info(f"Started watching {self.name}")
+    def start_run(self, loop=False):
+        if self.thread is not None:
+            logger.info(f"{self.name} is already running, Kill the old thread")
+            self.stop_run()
+
+        if loop:
+            target_func = self.update_loop
+            self.is_looping = True
         else:
-            logger.info(f"{self.name} is already running")
+            target_func = self.update_once
+
+        self.running.set()
+        self.thread = threading.Thread(target=target_func)
+        self.thread.daemon = True  # 设置为守护线程
+        self.thread.start()
+        logger.info(f"Started watching {self.name}")
     
     def stop_run(self):
         if self.thread is not None:
@@ -178,10 +198,12 @@ class SingleGPUServerWatcher:
             logger.info(f"Stopped watching {self.name}")
         else:
             logger.info(f"{self.name} is not running")
+            
+        self.is_looping = False
     
-    def restart_run(self):
+    def restart_run(self, loop=False):
         self.stop_run()
-        self.start_run()
+        self.start_run(loop=loop)
 
     def send_all_empty_remind(self):
         logger.info(f"Send all free remind for {self.name}")
