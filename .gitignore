@@ -43,3 +43,5 @@ vscode/
 server_info.json
 dingtalk_token.txt
 *.log
+
+.vscode/

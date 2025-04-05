@@ -1,7 +1,10 @@
 [
     {
-        "name": "<server name you want to show>",
-        "ip": "<ip or domain name>",
-        "username": "<ssh username>"
+        "name": "GPU Server",
+        "ip": "127.0.0.1",
+        "port": 22,
+        "username": "fuxuan",
+        "password": "Fuxuan12345",
+        "update_step": 10
     }
 ]
