@@ -1,0 +1,50 @@
+{
+    "Version": "1.0.0",
+    "Desc": "一个国际化的文件",
+    "Languages": {
+        "zh_CN": {
+            "page_title": "GPU使用情况监视平台",
+            "all_free_remind": "服务器\"{}\"的所有GPU都空闲了",
+            "have_free_remind": "服务器\"{}\"有空闲GPU了",
+            "update_page_frequent": "每隔{}秒刷新一次当前界面的显示状态",
+            "avg_gpu_util": "平均GPU利用率",
+            "avg_mem_util": "平均内存利用率",
+            "all_gpu_free": "所有GPU空闲",
+            "have_gpu_free": "有空闲GPU",
+            "button_part": "控件部分：",
+            "update_all": "更新所有GPU状态",
+            "update_once": "更新此GPU状态",
+            "loop_watch_setting": "循环监视设置",
+            "is_need_loop_watch": "是否循环监视GPU状态",
+            "update_step_hint": "更新间隔（秒）\n❗注意，过高的更新频率可能导致服务器启动访问防御",
+            "is_need_dingding_remind": "是否需要在GPU空闲时进行钉钉提醒",
+            "validate_ding": "验证钉钉机器人是否正常",
+            "display_error": "后端代码出错",
+            "ssh_connection_error": "SSH连接错误",
+            "ssh_authentication_error": "SSH认证错误",
+            "invalid_output_message": "无效的输出信息"
+        },
+        "en_US": {
+            "page_title": "GPU Usage Monitoring Platform",
+            "all_free_remind": "All GPUs on server \"{}\" are idle",
+            "have_free_remind": "Server \"{}\" has idle GPUs",
+            "update_page_frequent": "Refresh the current page display every {} seconds",
+            "avg_gpu_util": "Average GPU Utilization",
+            "avg_mem_util": "Average Memory Utilization",
+            "all_gpu_free": "All GPUs Idle",
+            "have_gpu_free": "Idle GPUs Available",
+            "button_part": "Control Panel:",
+            "update_all": "Update All GPU Status",
+            "update_once": "Update This GPU Status",
+            "loop_watch_setting": "Loop Monitoring Settings",
+            "is_need_loop_watch": "Loop Monitoring of GPU Status",
+            "update_step_hint": "Update Interval (seconds)\n❗Note: High update frequency may trigger server access defense",
+            "is_need_dingding_remind": "Send DingDing Notification on GPU Idle",
+            "validate_ding": "Validate DingDing Bot",
+            "display_error": "Backend Code Error",
+            "ssh_connection_error": "SSH Connection Error",
+            "ssh_authentication_error": "SSH Authentication Error",
+            "invalid_output_message": "Invalid Output Message"
+        }
+    }
+}
