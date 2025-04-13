@@ -1,1 +1,1 @@
-<your dingding webhook url>
+https://oapi.dingtalk.com/robot/send?access_token=e6594550df0bbe99f1ec3ed7c9a98b6b7e308c4c25506b820dc21ff9fbfb32a3

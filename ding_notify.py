@@ -1,33 +1,31 @@
 import json
 import requests
+from DingDingBot.DDBOT import DingDing
+
+from config import dingding_keyText
 from logger import logger
-from interfaces import IBotAnnouncer
+from i18n_service import i18n
 
-from DingDingBot.DDBOT import DingDing # type: ignore
-
-class DingDingBot(IBotAnnouncer):
-    def __init__(self, webhook: str):
-        self.webhook = webhook
-        self.dd = DingDing(webhook=webhook)
-
-    def send(self, message: str) -> None:
-        result = self.dd.Send_Text_Msg(Content="通知：" + message)
+with open('dingtalk_token.txt', 'r') as f:
+    webhook = f.read()
+dd = DingDing(webhook=webhook)
+def ding_print_txt(content:str):
+    error = None
+    try:
+        if webhook == "" or webhook == "<your dingding webhook url>":
+            return i18n.get_text("dingdingTest_emptyToken")
+        
+        result=dd.Send_Text_Msg(Content=dingding_keyText + ": " + content)
         if isinstance(result, str):
-            result = json.loads(result)
-        if result.get("errcode", 0) != 0:
-            logger.error(f"Failed to send message: {result.get('errmsg', '')}")
-        else:
-            logger.info("Message sent successfully")
-
-    def validate(self) -> str:
-        error = None
-        try:
-            if not self.webhook or self.webhook == "<your dingding webhook url>":
-                return "钉钉机器人webhook为空，请检查dingtalk_token.txt文件"
-            result = self.send("钉钉消息发送测试成功")
-            if result.get("errcode", 0) != 0:
-                error = result.get("errmsg", "")
-        except requests.RequestException as e:
-            logger.warning(f"Error validating DingDing webhook: {e}")
-            error = str(e)
-        return error
+            result = json.loads(result)  # 将字符串转换为字典
+            if result.get("errcode",0) !=0:
+                error = result.get("errmsg","")
+            elif result.get("status", True) != True:
+                error = result.get("message","")
+    except Exception as e:
+        logger.warning(f"Error validating DingDing webhook: {e}")
+        error = e
+    return error
+    
+if __name__ == '__main__':
+    print(ding_print_txt("test"))
