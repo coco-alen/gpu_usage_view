@@ -1,6 +1,8 @@
 from pathlib import Path
 import json
 
+import config
+
 class I18nService:
     """ 国际化支持 """
 
@@ -50,6 +52,10 @@ class I18nService:
         data = {"Version": "1.0.0", "Languages": self._lang_dict}
         with open(self._res_file, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
+
+
+i18n = I18nService()
+i18n.set_lang(config.language)
 
 # 测试
 if __name__ == "__main__":

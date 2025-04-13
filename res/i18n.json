@@ -14,15 +14,34 @@
             "button_part": "控件部分：",
             "update_all": "更新所有GPU状态",
             "update_once": "更新此GPU状态",
+            "see_details": "查看详情",
+            
             "loop_watch_setting": "循环监视设置",
             "is_need_loop_watch": "是否循环监视GPU状态",
             "update_step_hint": "更新间隔（秒）\n❗注意，过高的更新频率可能导致服务器启动访问防御",
-            "is_need_dingding_remind": "是否需要在GPU空闲时进行钉钉提醒",
+            "is_need_dingding_remind": "是否需要在GPU空闲时进行钉钉提醒?",
+            "no_dingding_remind": "无需",
+            "dingding_remind_have_free": "存在空闲GPU时提醒",
+            "dingding_remind_all_free": "所有GPU空闲时提醒",
+            "dingding_remind_once": "只在从繁忙变为空闲时提醒一次",
+            "dingding_remind_every": "每次探查到空闲GPU时都提醒",
             "validate_ding": "验证钉钉机器人是否正常",
-            "display_error": "后端代码出错",
-            "ssh_connection_error": "SSH连接错误",
-            "ssh_authentication_error": "SSH认证错误",
-            "invalid_output_message": "无效的输出信息"
+            "validate_dingding_help": "为验证钉钉机器人是否正常，将尝试发送一条测试信息，仅在发送失败后重置验证",
+            "validate_dingding_hint": "首次启动或之前存在错误时，需验证当前钉钉机器人是否正常工作",
+
+            "loading_message": "Loading: 正在加载数据，请稍等...",
+            "success_message": "Success: 数据加载成功！",
+            "display_error": "Error: 后端代码出错",
+            "ssh_connection_error": "Error: SSH连接错误",
+            "ssh_authentication_error": "Error: SSH认证错误",
+            "invalid_output_message": "Error: 无效的输出信息",
+
+            "dingdingTest_success": "钉钉通知测试成功！",
+            "dingdingTest_fail": "钉钉通知测试失败！错误信息：{}",
+            "dingdingTest_emptyToken": "钉钉机器人webhook为空，请检查dingtalk_token.txt文件",
+
+            "confirm": "确认",
+            "confirm_success": "已保存设置，请在右上角关闭此窗口"
         },
         "en_US": {
             "page_title": "GPU Usage Monitoring Platform",
@@ -39,12 +58,27 @@
             "loop_watch_setting": "Loop Monitoring Settings",
             "is_need_loop_watch": "Loop Monitoring of GPU Status",
             "update_step_hint": "Update Interval (seconds)\n❗Note: High update frequency may trigger server access defense",
-            "is_need_dingding_remind": "Send DingDing Notification on GPU Idle",
+            "is_need_dingding_remind": "Whether send DingDing Notification on GPU Idle?",
+            "no_dingding_remind": "No",
+            "dingding_remind_have_free": "Remind when there are idle GPUs",
+            "dingding_remind_all_free": "Remind when all GPUs are idle",
+            "dingding_remind_once": "Remind once when switching from busy to idle",
+            "dingding_remind_every": "Remind every time idle GPUs are detected",
             "validate_ding": "Validate DingDing Bot",
-            "display_error": "Backend Code Error",
-            "ssh_connection_error": "SSH Connection Error",
-            "ssh_authentication_error": "SSH Authentication Error",
-            "invalid_output_message": "Invalid Output Message"
+            "validate_dingding_help": "To validate the DingDing bot, a test message will be sent. Reset validation only if sending fails",
+            "validate_dingding_hint": "On first startup or if there was an error previously, validate if the current DingDing bot is working properly",
+            "see_details": "See Details",
+            "loading_message": "Loading: Loading data, please wait...",
+            "success_message": "Success: Data loaded successfully!",
+            "display_error": "Error: Backend Code Error",
+            "ssh_connection_error": "Error: SSH Connection Error",
+            "ssh_authentication_error": "Error: SSH Authentication Error",
+            "invalid_output_message": "Error: Invalid Output Message",
+            "dingdingTest_success": "DingDing message test sent successfully!",
+            "dingdingTest_fail": "DingDing message test failed! Error message: {}",
+            "dingdingTest_emptyToken": "DingDing bot webhook is empty, please check dingtalk_token.txt file",
+            "confirm": "Confirm",
+            "confirm_success": "Settings saved, please close this window in the upper right corner"
         }
     }
 }

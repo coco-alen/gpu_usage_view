@@ -1,10 +1,9 @@
 [
     {
-        "name": "GPU Server",
-        "ip": "127.0.0.1",
+        "name": "mit-TITAN-4",
+        "ip": "n4.mit.edu",
+        "username": "hanrui",
         "port": 22,
-        "username": "fuxuan",
-        "password": "Fuxuan12345",
-        "update_step": 10
+        "update_step": 300
     }
 ]

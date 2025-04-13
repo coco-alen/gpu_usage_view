@@ -1,0 +1,65 @@
+[
+    {
+        "name": "mit-TITAN-4",
+        "ip": "n4.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-A6000-30",
+        "ip": "l30.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-A6000-29",
+        "ip": "l29.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-A6000-28",
+        "ip": "l28.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-A6000-27",
+        "ip": "l27.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-A6000-26",
+        "ip": "l26.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-A6000-24",
+        "ip": "l24.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-3090-23",
+        "ip": "l23.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    },
+    {
+        "name": "mit-3090-22",
+        "ip": "l22.mit.edu",
+        "username": "hanrui",
+        "port": 22,
+        "update_step": 300
+    }
+]
